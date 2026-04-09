@@ -1,209 +1,986 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Y5IIN — Profile</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg: linear-gradient(135deg, #1e293b 0%, #0b0f14 100%);
-  --card: rgba(17,24,39,0.92);
-  --muted: #a7b0be;
-  --text: #e8eef7;
-  --accent: #62d0ff;
-  --accent-2:#9b7dff;
-  --ring: rgba(98,208,255,.45);
-  --shadow: 0 12px 36px rgba(0,0,0,.45);
-  --radius-xl: 28px;
-  --radius-lg: 20px;
-  --radius-md: 14px;
-}
-body.light{
-  --bg:linear-gradient(135deg,#f9fafb 0%,#e0e7ef 100%);
-  --card:#fff;
-  --muted:#6b7280;
-  --text:#111827;
-  --accent:#3b82f6;
-  --accent-2:#9333ea;
-  --ring:rgba(59,130,246,.25);
-  --shadow:0 8px 24px rgba(0,0,0,.12);
-}
-body{margin:0; font-family:Inter,sans-serif; background:var(--bg); color:var(--text); transition:.3s;}
-.container{max-width:1024px;margin:0 auto;padding:38px 22px 100px;}
-.header{display:flex; align-items:center; gap:28px; margin-bottom:28px;}
-.theme-toggle{margin-left:auto; cursor:pointer; padding:8px 18px; border-radius:16px; border:none; font-weight:700; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; box-shadow:0 2px 8px rgba(98,208,255,.12);}
-.theme-toggle:hover{opacity:.92;}
-.avatar{width:140px;height:140px;border-radius:32px;overflow:hidden;box-shadow:var(--shadow);}
-.avatar img{width:100%;height:100%;object-fit:cover;}
-.name{font-size:clamp(28px,3.5vw,44px); font-weight:900; letter-spacing:-1px;}
-.tagline{color:var(--muted); margin-top:8px; font-size:17px;}
-.card{background:var(--card); border-radius:var(--radius-xl); padding:24px; box-shadow:var(--shadow);}
-.stats{display:flex; gap:18px; flex-wrap:wrap;}
-.stat{flex:1; padding:18px; border-radius:20px; background:var(--card);}
-.stat .label{color:var(--muted); font-size:13px; text-transform:uppercase;}
-.stat .value{font-size:26px; font-weight:900;}
-.embed{display:flex; align-items:center; gap:22px; padding:20px; border-radius:var(--radius-lg); margin-bottom:16px; background:var(--card); box-shadow:0 2px 12px rgba(0,0,0,.10);}
-.icon{width:52px;height:52px; display:grid; place-items:center; background:linear-gradient(135deg,var(--accent),var(--accent-2)); border-radius:16px;}
-.icon svg{width:32px;height:32px; fill:var(--text);}
-.meta .title{font-weight:900; font-size:18px;}
-.meta .sub{color:var(--muted); font-size:15px;}
-.actions{margin-left:auto; display:flex; gap:8px;}
-.btn{border:none; border-radius:14px; padding:12px 16px; font-weight:700; cursor:pointer; background:linear-gradient(90deg,#e8eef7,#bcd7ff); color:#06101a; box-shadow:0 1px 6px rgba(98,208,255,.10);}
-.btn.ghost{background:transparent; color:var(--text); outline:1px solid rgba(255,255,255,.13);}
-.btn:hover{opacity:.93;}
-.pillbar{display:flex; gap:14px; margin-top:20px;}
-.pill{font-size:14px; font-weight:700; padding:10px 16px; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); box-shadow:0 1px 6px rgba(98,208,255,.10);}
-.flex-left{display:flex; align-items:center; gap:22px;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Y5IIN · editor · backup</title>
+  <meta name="description" content="Y5IIN · video editor. TikTok @y5iin · YouTube @y5iin · Discord community">
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0b0c10;
+      color: #f0f4fe;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Lightweight animated gradient background */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at 20% 30%, #1a1035, #0b0c10 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .bg-gradient::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 80% 70%, #2a1a4a, transparent 50%);
+      animation: slowPulse 18s infinite alternate ease-in-out;
+    }
+    @keyframes slowPulse {
+      0% { opacity: 0.3; transform: scale(1); }
+      100% { opacity: 0.7; transform: scale(1.05); }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #12141c; }
+    ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+    }
+
+    /* Header */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 12, 16, 0.4);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+    }
+    .logo i {
+      color: #a855f7;
+      filter: drop-shadow(0 0 8px #a855f7);
+    }
+    .logo span {
+      background: linear-gradient(135deg, #e9d5ff, #c084fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-weight: 500;
+      align-items: center;
+    }
+    .nav-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: white;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: #a855f7;
+      transition: width 0.2s ease;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Auth buttons */
+    .auth-buttons {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-outline-sm {
+      background: transparent;
+      border: 1px solid #a855f7;
+      color: #e9d5ff;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+    .btn-outline-sm:hover {
+      background: #a855f7;
+      color: white;
+    }
+    .btn-filled-sm {
+      background: #a855f7;
+      border: none;
+      color: white;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      font-size: 0.9rem;
+    }
+    .btn-filled-sm:hover {
+      background: #9333ea;
+      transform: translateY(-1px);
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #1e1e2a;
+      padding: 6px 14px 6px 10px;
+      border-radius: 40px;
+      border: 1px solid #3f3f5e;
+      cursor: pointer;
+      position: relative;
+    }
+    .user-dropdown {
+      position: absolute;
+      top: 48px;
+      right: 0;
+      background: #181820;
+      border: 1px solid #33334e;
+      border-radius: 20px;
+      padding: 8px 0;
+      min-width: 200px;
+      backdrop-filter: blur(12px);
+      display: none;
+      z-index: 100;
+    }
+    .user-profile.active .user-dropdown {
+      display: block;
+    }
+    .dropdown-item {
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #e0e0ff;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .dropdown-item:hover {
+      background: #2d2d42;
+    }
+    .logout-btn {
+      color: #f87171;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 70px 0 60px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .hero .accent {
+      color: #a855f7;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #b0b0d0;
+      max-width: 500px;
+      margin-bottom: 36px;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .btn-primary {
+      background: #a855f7;
+      border: none;
+      color: white;
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 8px 20px -5px #a855f780;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: #9333ea;
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #a855f7;
+      color: #e9d5ff;
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      background: #a855f720;
+      border-color: #c084fc;
+    }
+
+    .hero-visual {
+      background: rgba(20, 20, 30, 0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 24px;
+      border: 1px solid #a855f730;
+      box-shadow: 0 20px 40px -15px #000;
+    }
+    .preview-video {
+      aspect-ratio: 16/9;
+      background: #0f0f18;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: linear-gradient(145deg, #1e1a3a, #0a0e1a), url('https://images.pexels.com/photos/3945317/pexels-photo-3945317.jpeg?auto=compress&cs=tinysrgb&w=800');
+      background-size: cover;
+      background-blend-mode: overlay;
+      margin-bottom: 20px;
+      border: 1px solid #4c3b8f;
+    }
+    .play-icon {
+      background: #a855f7;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: white;
+      box-shadow: 0 0 25px #a855f7;
+      transition: transform 0.2s;
+    }
+    .preview-video:hover .play-icon {
+      transform: scale(1.05);
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin: 60px 0;
+    }
+    .stat-card {
+      background: rgba(25, 25, 35, 0.5);
+      backdrop-filter: blur(8px);
+      padding: 30px;
+      border-radius: 32px;
+      border: 1px solid #a855f720;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+    }
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #c084fc;
+      margin-bottom: 8px;
+    }
+
+    /* Section titles */
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 40px;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-title i {
+      color: #a855f7;
+    }
+
+    /* Projects grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    .project-card {
+      background: #12121c;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid #2d2d48;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: #a855f7;
+      box-shadow: 0 15px 25px -8px #a855f740;
+    }
+    .card-media {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .media-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #0a0a0f, transparent);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    .play-icon-sm {
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      border: 1px solid #a855f7;
+      transition: background 0.2s;
+    }
+    .project-card:hover .play-icon-sm {
+      background: #a855f7;
+    }
+    .card-info {
+      padding: 20px;
+    }
+    .card-info h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .stats {
+      display: flex;
+      gap: 16px;
+      color: #a0a0c0;
+      font-size: 0.9rem;
+    }
+
+    /* Platform cards */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 60px 0;
+    }
+    .platform-card {
+      background: #13131f;
+      border-radius: 36px;
+      padding: 36px;
+      border: 1px solid #2d2d4a;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.2s;
+    }
+    .platform-card:hover {
+      border-color: #a855f760;
+    }
+
+    /* Member area */
+    .member-badge {
+      background: #a855f7;
+      display: inline-block;
+      padding: 8px 24px;
+      border-radius: 40px;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .auth-modal {
+      background: #181825;
+      padding: 36px;
+      border-radius: 36px;
+      max-width: 400px;
+      width: 90%;
+      border: 1px solid #a855f7;
+      box-shadow: 0 20px 40px #00000080;
+    }
+    .input-group {
+      margin-bottom: 20px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 14px 18px;
+      background: #0f0f18;
+      border: 1px solid #3f3f60;
+      border-radius: 30px;
+      color: white;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    .input-group input:focus {
+      outline: none;
+      border-color: #a855f7;
+    }
+    .auth-switch {
+      text-align: center;
+      margin-top: 20px;
+      color: #b0b0d0;
+    }
+    .auth-switch a {
+      color: #c084fc;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .floating-discord {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #5865f2;
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 28px;
+      box-shadow: 0 8px 25px #5865f280;
+      z-index: 99;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .floating-discord:hover {
+      transform: scale(1.08);
+    }
+
+    footer {
+      border-top: 1px solid #2d2d48;
+      padding: 30px 0;
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .social-links a {
+      color: #b0b0d0;
+      margin-left: 24px;
+      font-size: 1.6rem;
+      transition: color 0.2s;
+    }
+    .social-links a:hover {
+      color: #c084fc;
+    }
+
+    /* Backup buttons inside dropdown */
+    .backup-item {
+      border-top: 1px solid #33334e;
+      margin-top: 8px;
+      padding-top: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .platform-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-links {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Mock images */
+    .bg-1 { background-image: linear-gradient(0deg, #0b0e1680, #0b0e1680), url('https://images.pexels.com/photos/3945317/pexels-photo-3945317.jpeg?auto=compress&cs=tinysrgb&w=600'); }
+    .bg-2 { background-image: linear-gradient(0deg, #0b0e1680, #0b0e1680), url('https://images.pexels.com/photos/2872419/pexels-photo-2872419.jpeg?auto=compress&cs=tinysrgb&w=600'); }
+    .bg-3 { background-image: linear-gradient(0deg, #0b0e1680, #0b0e1680), url('https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=600'); }
+    .bg-4 { background-image: linear-gradient(0deg, #0b0e1680, #0b0e1680), url('https://images.pexels.com/photos/6614982/pexels-photo-6614982.jpeg?auto=compress&cs=tinysrgb&w=600'); }
+  </style>
 </head>
 <body>
-<div class="container" id="mainPage">
-  <div class="flex-left">
+<div class="bg-gradient"></div>
+<div class="floating-discord" id="floatDiscord"><i class="fab fa-discord"></i></div>
+
+<div class="container">
+  <!-- Header -->
+  <header>
+    <div class="navbar">
+      <a href="#" class="logo">
+        <i class="fas fa-clapperboard"></i>
+        <span>Y5IIN</span>
+      </a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#youtube">YouTube</a>
+        <a href="#discord">Discord</a>
+        <a href="#tiktok">TikTok</a>
+        <div id="authArea"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Member welcome -->
+  <div id="memberWelcome" style="display: none;">
+    <div class="member-badge"><i class="fas fa-crown"></i> Welcome, <span id="memberName"></span></div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
     <div>
-      <div class="name" id="displayName">Y5IIN</div>
-      <div class="tagline" id="tagline">EDITING FOR FUN — Welcome to my world</div>
-    </div>
-    <div class="avatar"><img id="avatarImg" src="https://files.catbox.moe/lwo6y2.webp" alt="Profile"></div>
-    <button class="theme-toggle" id="themeToggle">Toggle Theme</button>
-  </div>
-
-  <div class="pillbar">
-    <span class="pill" id="collabBtn" style="cursor:pointer;">Open for collabs</span>
-    <span class="pill">Always building</span>
-  </div>
-
-  <div class="card" style="margin-top:20px;">
-    <div class="stats">
-      <div class="stat">
-        <div class="label">Visitors</div>
-        <div class="value" id="visitorCount">—</div>
-        <div class="muted" id="visitorHint" style="font-size:12px;"></div>
-      </div>
-      <div class="stat">
-        <div class="label">Last Updated</div>
-        <div class="value" id="lastUpdated">—</div>
-      </div>
-      <div class="stat">
-        <div class="label">Profiles</div>
-        <div class="value" id="profileCount">—</div>
+      <h1>edits that<br><span class="accent">define the vibe</span></h1>
+      <p>I'm Y5IIN — video editor & motion designer. I share projects, presets, and behind‑the‑scenes on Discord. Watch my work on TikTok and YouTube.</p>
+      <div class="hero-buttons">
+        <a href="https://www.tiktok.com/@y5iin" target="_blank" class="btn-primary"><i class="fab fa-tiktok"></i> @y5iin</a>
+        <a href="https://youtube.com/@y5iin" target="_blank" class="btn-outline"><i class="fab fa-youtube"></i> YouTube</a>
+        <button class="btn-outline" id="mainDiscordBtn"><i class="fab fa-discord"></i> Discord</button>
       </div>
     </div>
-  </div>
-
-  <section style="margin-top:26px;">
-    <h2>Embeds</h2>
-    <div id="embeds"></div>
+    <div class="hero-visual">
+      <div class="preview-video">
+        <div class="play-icon"><i class="fas fa-play"></i></div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span><i class="fab fa-tiktok" style="color: #fe2c55;"></i> latest edit</span>
+        <span style="background: #1e1e32; padding: 4px 16px; border-radius: 40px;">@y5iin</span>
+      </div>
+      <div style="display: flex; gap: 8px; margin-top: 16px;">
+        <span style="background: #2d2d48; padding: 4px 12px; border-radius: 40px; font-size: 0.8rem;">AE</span>
+        <span style="background: #2d2d48; padding: 4px 12px; border-radius: 40px; font-size: 0.8rem;">Premiere</span>
+        <span style="background: #2d2d48; padding: 4px 12px; border-radius: 40px; font-size: 0.8rem;">Twixtor</span>
+      </div>
+    </div>
   </section>
+
+  <!-- Stats counters -->
+  <div class="stats-grid">
+    <div class="stat-card"><i class="fab fa-tiktok fa-2x" style="color:#fe2c55;"></i><div class="stat-number" data-count="320">0</div><div>TikTok edits</div></div>
+    <div class="stat-card"><i class="fab fa-youtube fa-2x" style="color:#ff0000;"></i><div class="stat-number" data-count="85">0</div><div>YouTube videos</div></div>
+    <div class="stat-card"><i class="fab fa-discord fa-2x" style="color:#7289da;"></i><div class="stat-number" data-count="240">0</div><div>Project files</div></div>
+  </div>
+
+  <!-- Member exclusive projects -->
+  <div id="memberProjects" style="display: none;">
+    <h2 class="section-title"><i class="fas fa-lock"></i> Member exclusive</h2>
+    <div class="projects-grid">
+      <div class="project-card"><div class="card-media bg-1"><div class="media-overlay"><div class="play-icon-sm"><i class="fas fa-play"></i></div></div></div><div class="card-info"><h3>EXCLUSIVE CUT</h3><div class="stats">4K raw · members only</div></div></div>
+      <div class="project-card"><div class="card-media bg-4"><div class="media-overlay"><div class="play-icon-sm"><i class="fas fa-play"></i></div></div></div><div class="card-info"><h3>PRESET PACK</h3><div class="stats">20+ LUTs · download</div></div></div>
+    </div>
+  </div>
+
+  <!-- Work / Projects -->
+  <section id="work">
+    <h2 class="section-title"><i class="fas fa-film"></i> featured projects</h2>
+    <div class="projects-grid">
+      <div class="project-card" data-title="CYBERPUNK"><div class="card-media bg-1"><div class="media-overlay"><div class="play-icon-sm"><i class="fas fa-play"></i></div></div></div><div class="card-info"><h3>CYBERPUNK</h3><div class="stats">22k views</div></div></div>
+      <div class="project-card" data-title="ANIME FLOW"><div class="card-media bg-2"><div class="media-overlay"><div class="play-icon-sm"><i class="fas fa-play"></i></div></div></div><div class="card-info"><h3>ANIME FLOW</h3><div class="stats">18k views</div></div></div>
+      <div class="project-card" data-title="NEON SYNC"><div class="card-media bg-3"><div class="media-overlay"><div class="play-icon-sm"><i class="fas fa-play"></i></div></div></div><div class="card-info"><h3>NEON SYNC</h3><div class="stats">14k views</div></div></div>
+      <div class="project-card" data-title="VIBE CHECK"><div class="card-media bg-4"><div class="media-overlay"><div class="play-icon-sm"><i class="fas fa-play"></i></div></div></div><div class="card-info"><h3>VIBE CHECK</h3><div class="stats">12k views</div></div></div>
+    </div>
+  </section>
+
+  <!-- Platform cards -->
+  <div class="platform-grid">
+    <div id="youtube" class="platform-card">
+      <h3 style="font-size: 2rem; display: flex; gap: 12px;"><i class="fab fa-youtube" style="color:#ff0000;"></i> YouTube</h3>
+      <div style="margin: 20px 0;">12.3k subscribers · 85+ videos</div>
+      <p style="margin-bottom: 24px;">Longer edits, tutorials, and project breakdowns.</p>
+      <a href="https://youtube.com/@y5iin" target="_blank" class="btn-primary" style="background:#ff0000;">Subscribe</a>
+    </div>
+    <div id="discord" class="platform-card">
+      <h3 style="font-size: 2rem;"><i class="fab fa-discord" style="color:#7289da;"></i> Discord Server</h3>
+      <div style="margin: 20px 0;">2.8k+ editors · 240+ projects</div>
+      <p>Raw files, presets, feedback, collabs.</p>
+      <button class="btn-primary" id="discordCtaBtn" style="margin-top: 24px;">Request invite</button>
+    </div>
+  </div>
+
+  <!-- TikTok connect -->
+  <section id="tiktok" style="margin: 60px 0;">
+    <div style="display: flex; align-items: center; gap: 30px; background: #13131f; padding: 32px 40px; border-radius: 40px; border: 1px solid #2d2d48;">
+      <i class="fab fa-tiktok" style="font-size: 4rem; color: #fe2c55;"></i>
+      <div>
+        <h3>@y5iin on TikTok</h3>
+        <p>Daily edits, transitions & behind the scenes.</p>
+        <a href="https://www.tiktok.com/@y5iin" target="_blank" class="btn-outline" style="margin-top: 16px;">Follow</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>Y5IIN Web © <span id="year"></span></div>
+    <div class="social-links">
+      <a href="https://www.tiktok.com/@y5iin"><i class="fab fa-tiktok"></i></a>
+      <a href="https://youtube.com/@y5iin"><i class="fab fa-youtube"></i></a>
+      <a href="#" id="footerDiscordLink"><i class="fab fa-discord"></i></a>
+    </div>
+  </footer>
 </div>
 
-<!-- Collabs page (hidden by default) -->
-<div class="container" id="collabsPage" style="display:none;">
-  <div class="card" style="margin-top:32px;">
-    <h2 style="font-size:2rem;font-weight:900;margin-bottom:12px;">Collaboration Zone</h2>
-    <p style="font-size:1.15rem;color:var(--muted);margin-bottom:18px;">
-      Interested in collaborating with <b>Y5IIN</b>? Let's build something awesome together!<br>
-      Reach out via Discord or Instagram.
-    </p>
-    <div style="margin-bottom:18px;">
-      <b>Contact:</b>
-      <ul style="list-style:none;padding:0;margin:0;">
-        <li>Discord: <span style="color:var(--accent);font-weight:700;">discord.gg/Es6e2QVQhA</span></li>
-        <li>Instagram: <span style="color:var(--accent-2);font-weight:700;">@y5ii.n</span></li>
-      </ul>
-    </div>
-    <button class="btn" id="backBtn" style="margin-top:18px;">Back to Profile</button>
+<!-- Auth Modal -->
+<div class="modal-overlay" id="authModal">
+  <div class="auth-modal">
+    <h2 class="gradient-text" id="authModalTitle" style="margin-bottom: 24px;">Log in</h2>
+    <div class="input-group"><input type="text" id="authUsername" placeholder="Username"></div>
+    <div class="input-group"><input type="password" id="authPassword" placeholder="Password"></div>
+    <div class="input-group" id="confirmPasswordGroup" style="display: none;"><input type="password" id="authConfirmPassword" placeholder="Confirm password"></div>
+    <div id="authError" style="color: #f87171; margin-bottom: 16px; display: none;"></div>
+    <button class="btn-primary" id="authSubmitBtn" style="width:100%;">Log in</button>
+    <div class="auth-switch"><span id="authSwitchText">No account?</span> <a id="authSwitchLink">Sign up</a></div>
   </div>
 </div>
+
+<!-- Discord modal -->
+<div class="modal-overlay" id="discordModal">
+  <div class="auth-modal">
+    <i class="fab fa-discord" style="font-size:3.5rem; color:#7289da;"></i>
+    <h2 style="margin: 16px 0;">Y5IIN Discord</h2>
+    <p>Invite link shared on TikTok/YouTube @y5iin. Join the community!</p>
+    <button class="btn-primary" id="closeDiscordModalBtn" style="margin-top:24px;">Got it</button>
+  </div>
+</div>
+
+<!-- Hidden file input for import -->
+<input type="file" id="importFileInput" accept=".json,application/json" style="display: none;">
 
 <script>
-const SITE={
-  name:"Y5IIN",
-  tagline:"EDITING FOR FUN — Welcome to my world",
-  avatar:"https://files.catbox.moe/lwo6y2.webp",
-  lastUpdatedISO:"2025-06-08T12:00:00Z",
-  counterEndpoint:"https://api.countapi.xyz/hit/y5iin/profile",
-  embeds:[
-    {kind:"Discord", title:"Discord Server", handle:"discord.gg/Es6e2QVQhA", url:"https://discord.gg/Es6e2QVQhA", styleVariant:"indigo"},
-    {kind:"Instagram", title:"Instagram", handle:"@y5ii.n", url:"https://www.instagram.com/y5ii.n/?utm_source=ig_web_button_share_sheet", styleVariant:"violet"},
-    {kind:"YouTube", title:"YouTube Channel", handle:"@y5iin", url:"https://youtube.com/@y5iin?si=mtRR-MycmUN7wUs-", styleVariant:"crimson"},
-    {kind:"TikTok", title:"TikTok", handle:"@y5iin", url:"https://www.tiktok.com/@y5iin?_t=ZS-8zOUpSnSxF9&_r=1", styleVariant:"pink"},
-    {kind:"X", title:"Follow on X", handle:"Soon…", url:"#", styleVariant:"cyan"}
-  ]
-};
+  (function(){
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-const ICONS={
-  YouTube:`<svg viewBox="0 0 24 24"><path d="M23.5 6.2s-.2-1.7-.9-2.4c-.9-.9-1.9-.9-2.4-1C16.8 2.5 12 2.5 12 2.5h-.1s-4.8 0-8.2.3c-.5.1-1.5.1-2.4 1-.7.7-.9 2.4-.9 2.4S0 8.1 0 10v1.9c0 1.9.2 3.8.2 3.8s.2 1.7.9 2.4c.9.9 2.1.9 2.7 1 2 .2 8.2.3 8.2.3s4.8 0 8.2-.3c.5-.1 1.5-.1 2.4-1 .7-.7.9-2.4.9-2.4s.2-1.9.2-3.8V10c0-1.9-.2-3.8-.2-3.8zM9.5 14.5v-5.9l6.2 3-6.2 2.9z"/></svg>`,
-  TikTok:`<svg viewBox="0 0 24 24"><path d="M12 2c1 0 2 .2 3 .6v4.5c0 .3.2.6.5.7 1 .5 2.1.8 3.3.8v3.5c-1.5 0-3-.4-4.3-1.1v5.7c0 2.9-2.4 5.3-5.3 5.3S4 19.6 4 16.7c0-2.9 2.4-5.3 5.3-5.3.3 0 .7 0 1 .1v3.6c-.3-.1-.6-.1-1-.1-1 .0-1.8.9-1.8 1.8s.8 1.8 1.8 1.8c1 0 1.8-.9 1.8-1.8V2h1z"/></svg>`,
-  Instagram:`<svg viewBox="0 0 24 24"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.8-2.8a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z"/></svg>`,
-  X:`<svg viewBox="0 0 24 24"><path d="M18 2h4l-8.6 9.7L22 22h-7.1l-5.4-7.1L4 22H0l9.3-10.5L1.8 2h7.1l4.7 6.2L18 2z"/></svg>`,
-  Discord:`<svg viewBox="0 0 24 24"><path d="M20 4a19.8 19.8 0 00-4.9-1.5.1.1 0 00-.1.1c-.2.3-.4.6-.5.9a17.6 17.6 0 00-5 0 6.5 6.5 0 00-.5-.9.1.1 0 00-.1-.1A19.8 19.8 0 004 4c-1.6 2.3-2.6 5.1-2.6 8.1 0 6.5 4.7 11.9 11 11.9s11-5.4 11-11.9c0-3-.9-5.8-2.6-8.1zM8.5 15c-.9 0-1.6-.8-1.6-1.7 0-.9.7-1.7 1.6-1.7.9 0 1.6.8 1.6 1.7 0 .9-.7 1.7-1.6 1.7zm7 0c-.9 0-1.6-.8-1.6-1.7 0-.9.7-1.7 1.6-1.7.9 0 1.6.8 1.6 1.7 0 .9-.7 1.7-1.6 1.7z"/></svg>`
-};
+    // Counters with IntersectionObserver
+    const counters = document.querySelectorAll('.stat-number');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) {
+          const el = e.target;
+          const target = +el.dataset.count;
+          let current = 0;
+          const step = Math.ceil(target / 40);
+          const timer = setInterval(() => {
+            current += step;
+            if(current >= target) {
+              el.textContent = target;
+              clearInterval(timer);
+            } else {
+              el.textContent = current;
+            }
+          }, 20);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => observer.observe(c));
 
-const VARIANT_STYLES={
-  cyan:'linear-gradient(180deg, rgba(98,208,255,.18), rgba(98,208,255,.08))',
-  violet:'linear-gradient(180deg, rgba(155,125,255,.20), rgba(155,125,255,.08))',
-  crimson:'linear-gradient(180deg, rgba(244,63,94,.22), rgba(244,63,94,.10))',
-  pink:'linear-gradient(180deg, rgba(236,72,153,.22), rgba(236,72,153,.10))',
-  indigo:'linear-gradient(180deg, rgba(79,70,229,.22), rgba(79,70,229,.10))',
-  gray:'linear-gradient(180deg, rgba(148,163,184,.22), rgba(148,163,184,.10))'
-};
+    // Project card popups
+    document.querySelectorAll('.project-card').forEach(c => {
+      c.addEventListener('click', () => {
+        const title = c.dataset.title || c.querySelector('h3')?.innerText || 'this edit';
+        alert(`✨ "${title}" — full project available on Discord.`);
+      });
+    });
 
-function renderEmbeds(){
-  const container=document.getElementById("embeds"); container.innerHTML="";
-  SITE.embeds.forEach(e=>{
-    const embed=document.createElement("div"); embed.className="embed"; embed.style.background=VARIANT_STYLES[e.styleVariant]||VARIANT_STYLES.gray;
-    embed.innerHTML=`
-      <div class="icon">${ICONS[e.kind]||""}</div>
-      <div class="meta">
-        <div class="title">${e.title}</div>
-        <div class="sub">${e.handle}</div>
-      </div>
-      ${e.url && e.url!=="#" ? `<div class="actions">
-        <button class="btn" onclick="window.open('${e.url}','_blank')">Open</button>
-        <button class="btn ghost" onclick="navigator.clipboard.writeText('${e.url}')">Copy</button>
-      </div>` : ""}
-    `;
-    container.appendChild(embed);
-  });
-  document.getElementById("profileCount").textContent=SITE.embeds.length;
-}
+    // Discord modal
+    const discordModal = document.getElementById('discordModal');
+    function showDiscord() { discordModal.style.display = 'flex'; }
+    document.getElementById('mainDiscordBtn').addEventListener('click', showDiscord);
+    document.getElementById('discordCtaBtn').addEventListener('click', showDiscord);
+    document.getElementById('footerDiscordLink').addEventListener('click', (e) => { e.preventDefault(); showDiscord(); });
+    document.getElementById('floatDiscord').addEventListener('click', showDiscord);
+    document.getElementById('closeDiscordModalBtn').addEventListener('click', () => discordModal.style.display = 'none');
+    discordModal.addEventListener('click', (e) => { if(e.target === discordModal) discordModal.style.display = 'none'; });
 
-function formatDateFriendly(iso){try{const d=new Date(iso);return d.toLocaleString(undefined,{year:'numeric',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'})}catch(e){return iso}}
+    // Smooth scroll
+    document.querySelectorAll('.nav-links a, .logo').forEach(l => {
+      l.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if(href && href !== '#' && href.startsWith('#')) {
+          e.preventDefault();
+          document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+        } else if(href === '#') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
 
-function updateHeader(){
-  document.getElementById("displayName").textContent=SITE.name;
-  document.getElementById("tagline").textContent=SITE.tagline;
-  document.getElementById("avatarImg").src=SITE.avatar;
-  document.getElementById("lastUpdated").textContent=formatDateFriendly(SITE.lastUpdatedISO);
-}
+    // ----- AUTH SYSTEM with EXPORT/IMPORT (localStorage + JSON file backup) -----
+    const USERS_KEY = 'y5iin_users';
+    const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+    const saveUsers = (u) => localStorage.setItem(USERS_KEY, JSON.stringify(u));
 
-async function updateVisitors(){
-  const el=document.getElementById("visitorCount"); const hint=document.getElementById("visitorHint");
-  try{
-    const res=await fetch(SITE.counterEndpoint);
-    const data=await res.json();
-    el.textContent=data.value||"—";
-    hint.textContent="total visitors";
-  }catch(err){el.textContent="—"; hint.textContent="error";}
-}
+    const authArea = document.getElementById('authArea');
+    const authModal = document.getElementById('authModal');
+    const authTitle = document.getElementById('authModalTitle');
+    const authSubmit = document.getElementById('authSubmitBtn');
+    const switchLink = document.getElementById('authSwitchLink');
+    const switchText = document.getElementById('authSwitchText');
+    const usernameInp = document.getElementById('authUsername');
+    const passwordInp = document.getElementById('authPassword');
+    const confirmGroup = document.getElementById('confirmPasswordGroup');
+    const confirmInp = document.getElementById('authConfirmPassword');
+    const authError = document.getElementById('authError');
 
-document.getElementById("themeToggle").addEventListener("click",()=>{document.body.classList.toggle("light")});
+    let authMode = 'login';
+    function setMode(mode) {
+      authMode = mode;
+      if (mode === 'login') {
+        authTitle.textContent = 'Log in';
+        authSubmit.textContent = 'Log in';
+        switchText.textContent = 'No account?';
+        switchLink.textContent = 'Sign up';
+        confirmGroup.style.display = 'none';
+      } else {
+        authTitle.textContent = 'Create account';
+        authSubmit.textContent = 'Sign up';
+        switchText.textContent = 'Have an account?';
+        switchLink.textContent = 'Log in';
+        confirmGroup.style.display = 'block';
+      }
+      authError.style.display = 'none';
+    }
 
-updateHeader(); renderEmbeds(); updateVisitors();
+    function showAuthModal(mode = 'login') {
+      setMode(mode);
+      authModal.style.display = 'flex';
+      usernameInp.value = '';
+      passwordInp.value = '';
+      if(confirmInp) confirmInp.value = '';
+    }
 
-// Collabs page logic
-document.getElementById("collabBtn").onclick=function(){
-  document.getElementById("mainPage").style.display="none";
-  document.getElementById("collabsPage").style.display="block";
-};
-document.getElementById("backBtn").onclick=function(){
-  document.getElementById("collabsPage").style.display="none";
-  document.getElementById("mainPage").style.display="block";
-};
+    // Export users to JSON file
+    function exportUsers() {
+      const users = getUsers();
+      const dataStr = JSON.stringify(users, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'users.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Import users from JSON file
+    function importUsers(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (Array.isArray(imported)) {
+            // Validate each user has username and password
+            const valid = imported.every(u => u.username && u.password);
+            if (!valid) throw new Error('Invalid user format');
+            saveUsers(imported);
+            alert('Accounts imported successfully! The page will reload to apply changes.');
+            location.reload();
+          } else {
+            throw new Error('File must contain an array of users');
+          }
+        } catch (err) {
+          alert('Error importing file: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Trigger file input for import
+    const importFileInput = document.getElementById('importFileInput');
+    importFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        importUsers(file);
+      }
+      importFileInput.value = ''; // allow re-upload same file
+    });
+
+    function updateAuthUI() {
+      const current = JSON.parse(localStorage.getItem('y5iin_currentUser') || 'null');
+      const memberWelcome = document.getElementById('memberWelcome');
+      const memberProjects = document.getElementById('memberProjects');
+      if (current) {
+        authArea.innerHTML = `
+          <div class="user-profile" id="userProfileTrigger">
+            <i class="fas fa-user-circle"></i><span>${current.username}</span>
+            <div class="user-dropdown">
+              <div class="dropdown-item"><i class="fas fa-user"></i> Profile</div>
+              <div class="dropdown-item backup-item" id="exportAccountsBtn"><i class="fas fa-download"></i> Export accounts</div>
+              <div class="dropdown-item" id="importAccountsBtn"><i class="fas fa-upload"></i> Import accounts</div>
+              <div class="dropdown-item logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Log out</div>
+            </div>
+          </div>
+        `;
+        const profileTrigger = document.getElementById('userProfileTrigger');
+        profileTrigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          profileTrigger.classList.toggle('active');
+        });
+        document.addEventListener('click', () => {
+          document.querySelectorAll('.user-profile.active').forEach(p => p.classList.remove('active'));
+        });
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          localStorage.removeItem('y5iin_currentUser');
+          updateAuthUI();
+          memberWelcome.style.display = 'none';
+          memberProjects.style.display = 'none';
+        });
+        document.getElementById('exportAccountsBtn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          exportUsers();
+        });
+        document.getElementById('importAccountsBtn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          importFileInput.click();
+        });
+        document.getElementById('memberName').textContent = current.username;
+        memberWelcome.style.display = 'block';
+        memberProjects.style.display = 'block';
+      } else {
+        authArea.innerHTML = `
+          <div class="auth-buttons">
+            <button class="btn-outline-sm" id="showLoginBtn">Log in</button>
+            <button class="btn-filled-sm" id="showSignupBtn">Sign up</button>
+          </div>
+        `;
+        document.getElementById('showLoginBtn').addEventListener('click', () => showAuthModal('login'));
+        document.getElementById('showSignupBtn').addEventListener('click', () => showAuthModal('signup'));
+        memberWelcome.style.display = 'none';
+        memberProjects.style.display = 'none';
+      }
+    }
+
+    async function handleAuth() {
+      const username = usernameInp.value.trim();
+      const password = passwordInp.value;
+      if (!username || !password) {
+        authError.textContent = 'Please fill all fields.';
+        authError.style.display = 'block';
+        return;
+      }
+      if (authMode === 'signup') {
+        if (password !== confirmInp.value) {
+          authError.textContent = 'Passwords do not match.';
+          authError.style.display = 'block';
+          return;
+        }
+        const users = getUsers();
+        if (users.find(u => u.username === username)) {
+          authError.textContent = 'Username already exists.';
+          authError.style.display = 'block';
+          return;
+        }
+        users.push({ username, password });
+        saveUsers(users);
+        localStorage.setItem('y5iin_currentUser', JSON.stringify({ username }));
+        updateAuthUI();
+        authModal.style.display = 'none';
+        alert(`Welcome, ${username}! Your account is saved locally and can be backed up.`);
+      } else {
+        const users = getUsers();
+        const user = users.find(u => u.username === username && u.password === password);
+        if (!user) {
+          authError.textContent = 'Invalid username or password.';
+          authError.style.display = 'block';
+          return;
+        }
+        localStorage.setItem('y5iin_currentUser', JSON.stringify({ username: user.username }));
+        updateAuthUI();
+        authModal.style.display = 'none';
+      }
+    }
+
+    authSubmit.addEventListener('click', handleAuth);
+    switchLink.addEventListener('click', () => setMode(authMode === 'login' ? 'signup' : 'login'));
+    authModal.addEventListener('click', (e) => { if(e.target === authModal) authModal.style.display = 'none'; });
+    [usernameInp, passwordInp, confirmInp].forEach(i => i?.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleAuth(); }));
+
+    // Initialize with demo user if empty
+    if (getUsers().length === 0) {
+      saveUsers([{ username: 'demo', password: '1234' }]);
+    }
+    updateAuthUI();
+  })();
 </script>
-<footer style="width:100%;text-align:center;margin-top:40px;color:var(--muted);font-size:15px;letter-spacing:1px;">
-  ©️2025 BLACK GX COPYRIGHT RESERVED
-</footer>
 </body>
 </html>
